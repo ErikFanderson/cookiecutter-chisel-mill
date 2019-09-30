@@ -2,16 +2,25 @@
 # Author: {{cookiecutter.author}}
 # Date: {% now 'local', '%m/%d/%Y' %}
 
-src={{cookiecutter.package}}
+pkg={{cookiecutter.package}}
 
 .PHONY: default 
 default: run
 
 .PHONY: run 
 run:
-	mill $(src).run
+	mill $(pkg).run
+	mkdir -p generated/
+	mv *.fir *.v *.anno.json generated/
 
 .PHONY: compile
 compile:
-	mill $(src).compile
+	mill $(pkg).compile
 
+.PHONY: test 
+test:
+	mill $(pkg).test
+
+.PHONY: clean
+clean:
+	rm -rf generated/ out/

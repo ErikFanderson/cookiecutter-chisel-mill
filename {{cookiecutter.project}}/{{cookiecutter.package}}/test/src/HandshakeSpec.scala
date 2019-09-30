@@ -1,4 +1,4 @@
-package ayarlabs.thermal_tuning
+package {{cookiecutter.package}} 
 import chisel3._
 import chisel3.iotesters
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
