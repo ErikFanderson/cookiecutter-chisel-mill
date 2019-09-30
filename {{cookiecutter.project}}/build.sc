@@ -5,7 +5,7 @@
 // build.sc
 import mill._, scalalib._
 import coursier.maven.MavenRepository
-object rtl extends ScalaModule {
+object {{cookiecutter.package}} extends ScalaModule {
     // Specify scala version
     def scalaVersion = "{{cookiecutter.scala_version}}"
     // Enumerate Ivy dependencies

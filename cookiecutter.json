@@ -1,5 +1,6 @@
 {
 "project": "default_project",
+"package": "default_package",
 "author": "Erik Anderson",
-"scala_version": "2.12.4"
+"scala_version": "2.11.12"
 }

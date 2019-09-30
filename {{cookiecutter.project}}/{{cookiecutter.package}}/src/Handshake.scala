@@ -1,4 +1,4 @@
-package rtl 
+package {{cookiecutter.package}} 
 import chisel3._
 import chisel3.util._
 import scala.math._
@@ -9,6 +9,35 @@ object HandshakeState extends ChiselEnum {
   val AckLow, AckHigh, CmdValidAckLow, WaitForReadyAckLow, CmdValidAckHigh, WaitForReadyAckHigh = Value
 }
 import HandshakeState._
+
+object CMD extends ChiselEnum {
+  val CAL_SU, CAL_SD, SWEEP_UP, SWEEP_DOWN, SU_SD, LOCK, MIN_POWER_TRACK, NONE =
+    Value
+}
+
+/** Chain of registers for synchronizing 
+  * @param initialValue the reset value for the sync registers
+  * @param length the number of chained register
+  */
+class Synchronizer(initialValue: Boolean = false, length: Int = 2) extends Module {
+  /* Define IO */
+  val io = IO(new Bundle(){
+    val in = Input(Bool())
+    val out = Output(Bool())
+  })
+  /* Define registers */
+  val registers = (0 until length).map(i => RegInit(initialValue.B))
+  /* Connect registers and IO */
+  registers.zipWithIndex.foreach {
+    case (reg, ind) =>
+      if (ind == 0) {
+        reg := io.in 
+      } else {
+        reg := registers(ind - 1)
+      }
+  }
+  io.out := registers(length-1)
+}
 
 /** Implements 2-phase handshaking and read-valid interface to main tuning FSM */
 class HandshakeFsm(sim: Boolean = false) extends Module {
