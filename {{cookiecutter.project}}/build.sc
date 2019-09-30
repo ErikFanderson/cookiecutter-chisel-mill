@@ -5,7 +5,9 @@
 // build.sc
 import mill._, scalalib._
 import coursier.maven.MavenRepository
-object {{cookiecutter.package}} extends ScalaModule {
+
+/** Common Module trait making additional modules */
+trait CommonModule extends ScalaModule {
     // Specify scala version
     def scalaVersion = "{{cookiecutter.scala_version}}"
     
@@ -35,4 +37,10 @@ object {{cookiecutter.package}} extends ScalaModule {
       )
       def testFrameworks = Seq("org.scalatest.tools.Framework")
     }
+}
+
+/** {{cookiecutter.package}} module */
+object {{cookiecutter.package}} extends CommonModule {
+  // Specify main class
+  //def mainClass = Some("{{cookiecutter.package}}.Main")
 }

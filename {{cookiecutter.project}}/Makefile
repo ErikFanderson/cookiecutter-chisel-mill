@@ -23,4 +23,5 @@ test:
 
 .PHONY: clean
 clean:
-	rm -rf generated/ out/
+	mill clean
+	rm -rf *.anno.json *.fir *.v generated/ out/ test_run_dir/
