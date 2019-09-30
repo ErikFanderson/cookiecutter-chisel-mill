@@ -1,4 +1,5 @@
 {
 "project": "default_project",
-"author": "Erik Anderson"
+"author": "Erik Anderson",
+"scala_version": "2.12.4"
 }
