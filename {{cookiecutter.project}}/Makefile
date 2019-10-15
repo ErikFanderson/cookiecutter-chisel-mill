@@ -11,7 +11,7 @@ default: run
 run:
 	mill $(module).run
 	mkdir -p generated/
-	mv *.fir *.v *.anno.json generated/
+	mv *.f *.fir *.v *.anno.json generated/
 
 .PHONY: compile
 compile:
